@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Citas - Clínica Salud Total</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="bg-primary text-white py-3">
+        <div class="container">
+            <h1 class="h3 mb-0">Clínica Salud Total</h1>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="especialidades.html">Especialidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reserva.html">Reservar Cita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="citas.html">Mis Citas</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="py-5">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Mis Citas Reservadas</h2>
+                    <a href="reserva.html" class="btn btn-primary">Nueva Cita</a>
+                </div>
+
+                <div id="alertNoCitas" class="alert alert-info" style="display: none;">
+                    <svg class="me-2" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                    </svg>
+                    No tiene citas reservadas. <a href="reserva.html">Reservar una cita ahora</a>
+                </div>
+
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle" id="tablaCitas">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>Paciente</th>
+                                        <th>Documento</th>
+                                        <th>Especialidad</th>
+                                        <th>Fecha</th>
+                                        <th>Hora</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cuerpoTablaCitas">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title">Información Importante</h5>
+                            <ul class="mb-0">
+                                <li>Por favor llegue 15 minutos antes de su cita.</li>
+                                <li>Traiga su documento de identidad y su tarjeta de seguro (si aplica).</li>
+                                <li>Si necesita cancelar su cita, hágalo con al menos 24 horas de anticipación.</li>
+                                <li>Para reprogramar una cita, primero debe cancelarla y luego crear una nueva reserva.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
+    <div class="modal fade" id="modalConfirmarCancelacion" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Cancelación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro que desea cancelar esta cita?</p>
+                    <p class="text-muted mb-0" id="datosCitaCancelar"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, mantener cita</button>
+                    <button type="button" class="btn btn-danger" id="btnConfirmarCancelacion">Sí, cancelar cita</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toast" class="toast" role="alert">
+            <div class="toast-header">
+                <strong class="me-auto">Notificación</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="toastMessage"></div>
+        </div>
+    </div>
+    <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <!-- Info clínica -->
+            <div class="col-md-4 mb-3">
+                <h5>Clínica Salud Total</h5>
+                <p>Tu salud, nuestra misión</p>
+                <p><strong>Grupo 02 - Ingeniería Web</strong></p>
+            </div>
+
+            <!-- Horario -->
+            <div class="col-md-4 mb-3">
+                <h5>Horario de Atención</h5>
+                <p>Lunes a Viernes: 8:00 AM - 8:00 PM</p>
+                <p>Sábados: 9:00 AM - 2:00 PM</p>
+                <p>Domingos y Feriados: Cerrado</p>
+            </div>
+
+            <!-- Contacto y redes -->
+            <div class="col-md-4 text-md-end mb-3">
+                <h5>Contacto</h5>
+                <p>Teléfono: (01) 123-4567</p>
+                <p>Email: contacto@clinicasaludtotal.com</p>
+                <div class="mt-2">
+                    <a href="#" class="text-white me-2">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="#" class="text-white me-2">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="#" class="text-white me-2">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+                    <a href="#" class="text-white">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="border-light">
+        <div class="text-center">
+            <small>&copy; 2025 Clínica Salud Total - Todos los derechos reservados</small>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/citas.js"></script>
+</body>
+</html>
